@@ -309,7 +309,14 @@ export default function App() {
 
 
 
-
+const handleMapMode = () => {
+  const change = ["standard", "satellite", "terrain", "hybrid"]
+    setCurrent(current + 1)
+    setMode(change[current])
+    if(current === 3){
+      setCurrent(0)
+    }
+}
 
 
 
@@ -337,6 +344,8 @@ export default function App() {
           )}
         </MapView>
       )}
+       <TouchableOpacity style={styles.touch} onPress={()=>handleMapMode()} >
+      </TouchableOpacity>
     </View>
   );
 };
