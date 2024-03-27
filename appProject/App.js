@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import Update from "./screens/Update";
 import Calender from "./screens/Calender.js";
-import IPhone1415Pro from "./screens/IPhone1415Pro.js"
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 
@@ -26,7 +25,6 @@ const App = () => {
       <NavigationContainer>
         {hideSplashScreen ? (
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="IPhone1415Pro" component={IPhone1415Pro} />
             {/* <Stack.Screen
               name="Update"
               component={Update}
