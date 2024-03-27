@@ -8,7 +8,6 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [location, setLocation] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [focusedInput, setFocusedInput] = useState(null);
 
@@ -23,6 +22,10 @@ const SignUp = () => {
   };
 
   const signup = () => {
+    if (!name || !email || !password || !confirmPassword) {
+      console.log("Please fill in all fields");
+      return;
+    }
     if (password !== confirmPassword) {
       console.log("Passwords do not match");
       return;
@@ -32,7 +35,6 @@ const SignUp = () => {
       name: name,
       email: email,
       password: password,
-      location: location
     };
 
     axios.post(`http://${IP1}:3001/usermobile/signupUser`, userData)
@@ -48,18 +50,15 @@ const SignUp = () => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.backgroundImage}
+      style={styles.container}
     >
-      <ImageBackground
-        style={styles.backgroundImage}
-        resizeMode="cover"
-        source={require("../assets/vacation-768x453.jpg")}
-      >
-        <View style={styles.container}>
+      {/* <Text style={styles.title}>Sign up</Text> */}
+        <View style={styles.innercontainer}>
           <Image
-            source={{ uri: 'https://www.freevector.com/uploads/vector/preview/9751/FreeVector-Vacation-Icon.jpg' }}
+            source={require ('../assets/logo_app.png')} 
             style={styles.icon}
           />
+          <View style={styles.inputView}>
           <TextInput
             style={[
               styles.input,
@@ -106,62 +105,66 @@ const SignUp = () => {
             onBlur={handleBlur}
             value={confirmPassword}
           />
-          <TextInput
-            style={[
-              styles.input,
-              focusedInput === 'location' && styles.focusedInput,
-            ]}
-            placeholder="Location"
-            onChangeText={setLocation}
-            onFocus={() => handleFocus('location')}
-            onBlur={handleBlur}
-            value={location}
-          />
+          </View>
+          <View style={styles.buttonView}>
           <TouchableOpacity style={styles.signupButton} onPress={signup}>
             <Text style={styles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
+          </View>
         </View>
-      </ImageBackground>
+      
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-  },
   container: {
-    width: '100%',
-    padding: 30,
-    alignItems: 'center',
+    flex: 1
+  },
+  innercontainer: {
+    alignItems : "center",
+    paddingTop: 70,
+    flex:1
+  },
+  title : {
+    fontSize : 30,
+    fontWeight : "bold",
+    textTransform : "uppercase",
+    textAlign: "center",
+    paddingVertical : 40,
+    color : "black"
   },
   icon: {
-    width: 100,
-    height: 100,
-    marginBottom: 40,
-    borderRadius: 50,
+    height : 200,
+    width : 230,
+  },
+  inputView : {
+    gap : 30,
+    width : "100%",
+    paddingHorizontal : 40,
+    marginBottom  :60
   },
   input: {
-    height: 40,
-    width: '100%',
-    marginBottom: 15,
-    borderColor: '#F27438',
-    borderWidth: 3,
-    borderRadius: 20,
-    padding: 10,
-    textAlign: 'center',
-    backgroundColor: '#B6D8F2',
+    height : 50,
+    paddingHorizontal : 20,
+    borderColor : "blue",
+    borderWidth : 1,
+    borderRadius: 7,
   },
   signupButton: {
-    backgroundColor: "#80586D",
-    padding: 10,
-    borderRadius: 20,
-    width: '70%',
-    alignItems: 'center',
-    marginTop: 20,
+    backgroundColor : "#5784BA",
+    height : 40,
+    borderColor : "gray",
+    borderWidth  : 1,
+    borderRadius : 5,
+    alignItems : "center",
+    justifyContent : "center",
+    
+  },
+  buttonView :{
+    width :"100%",
+    paddingHorizontal : 50,
+    marginBottom:20
   },
   buttonText: {
     color: 'white',

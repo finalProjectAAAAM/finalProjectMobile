@@ -13,6 +13,10 @@ const Signin = () => {
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
   const handleLogin = async () => {
+    if ( !email || !password || !confirmPassword) {
+      console.log("Please fill in all fields");
+      return;
+    }
     try {
       const response = await axios.post(`http://${IP1}:3001/usermobile/signinUser`, { email, pwd });
       
@@ -34,17 +38,14 @@ const Signin = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
-      <ImageBackground
-        style={styles.backgroundImage}
-        resizeMode="cover"
-        source={require("../assets/vacation-768x453.jpg")}
-      >
         <View style={styles.innerContainer}>
-          <Image
-            source={{ uri: 'https://www.freevector.com/uploads/vector/preview/9751/FreeVector-Vacation-Icon.jpg' }}
+          
+        <Image
+            source={require ('../assets/logo_app.png')} 
             style={styles.icon}
           />
 
+          <View style={styles.inputView}>
           <TextInput
             style={[styles.input, isEmailFocused && styles.focusedInput]}
             placeholder="Email"
@@ -63,20 +64,21 @@ const Signin = () => {
             onBlur={() => setIsPasswordFocused(false)}
             value={pwd}
           />
-
-          <TouchableOpacity onPress={() => console.log("Forget your password!")}>
-            <Text style={styles.headerText}>Forget your password!</Text>
-          </TouchableOpacity>
-
+          </View>
+    
+         
+          <View style={styles.buttonView}>
           <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
             <Text style={styles.buttonText}>Log In</Text>
           </TouchableOpacity>
-
           <TouchableOpacity style={styles.signupButton} onPress={() => navigation.navigate('SignUp')}>
             <Text style={styles.buttonText}>Sign up</Text>
           </TouchableOpacity>
+          </View>
+          <TouchableOpacity onPress={() => console.log("Forget your password!")}>
+            <Text style={styles.headerText}>Forget your password!</Text>
+          </TouchableOpacity>
         </View>
-      </ImageBackground>
     </KeyboardAvoidingView>
   );
 };
@@ -85,61 +87,70 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  backgroundImage: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-  },
   innerContainer: {
-    width: '80%',
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
+    alignItems : "center",
+    paddingTop: 70,
+  },
+  title : {
+    fontSize : 30,
+    fontWeight : "bold",
+    textTransform : "uppercase",
+    textAlign: "center",
+    paddingVertical : 40,
+    color : "black"
+  },
+  inputView : {
+    gap : 20,
+    width : "100%",
+    paddingHorizontal : 40,
+    marginBottom  :69,
   },
   icon: {
-    width: 100,
-    height: 100,
-    marginBottom: 40,
-    borderRadius: 30,
+    height : 200,
+    width : 230,
+   
   },
   headerText: {
     fontSize: 14,
     fontWeight: 'bold',
     marginTop: 25,
-    color: 'white',
+    color: 'black',
+    marginBottom:15
   },
   input: {
-    height: 40,
-    width: '100%',
-    marginBottom: 15,
-    borderColor: '#F27438',
-    borderWidth: 3,
-    borderRadius: 20,
-    padding: 10,
-    textAlign: 'center',
-    backgroundColor: '#B6D8F2',
+    height : 50,
+    paddingHorizontal : 20,
+    borderColor : "blue",
+    borderWidth : 1,
+    borderRadius: 7,
+    marginBottom:20
   },
   focusedInput: {
     height: 50,
     fontSize: 18,
   },
   loginButton: {
-    backgroundColor: '#226D68',
-    padding: 10,
-    borderRadius: 20,
-    width: '100%',
-    alignItems: 'center',
-    marginTop: 20,
+    backgroundColor : "#9ACD32",
+    height : 40,
+    borderColor : "white",
+    borderWidth  : 1,
+    borderRadius : 5,
+    alignItems : "center",
+    justifyContent : "center"
+  },
+  buttonView :{
+    width :"100%",
+    paddingHorizontal : 70,
+   
   },
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
   },
   signupButton: {
-    backgroundColor: "#80586D",
+    backgroundColor: "#5784BA",
     padding: 10,
-    borderRadius: 20,
+    borderRadius: 5,
     width: '100%',
     alignItems: 'center',
     marginTop: 20,
