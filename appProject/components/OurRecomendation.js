@@ -147,13 +147,14 @@ const styles = StyleSheet.create({
   frameGroup: {
     top: 88,
     left: 7,
-    backgroundColor: Color.colorDarkslateblue,
-    width: 332,
-    height: 90,
+    backgroundColor: "#303333",
+    width: 332, 
+    height: 95,
     justifyContent: "center",
     padding: Padding.p_5xs,
-    borderRadius: Border.br_3xs,
+    borderRadius: 25,
     position: "absolute",
+    opacity :0.8
   },
   frameParent: {
     marginTop:5,
