@@ -1,65 +1,117 @@
-import * as React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+
+import {
+  Text,
+  StyleSheet,
+  View,
+  TouchableHighlight,
+  Alert,
+} from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, Color, FontSize, Padding } from "../GlobalStyles";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Feather } from "@expo/vector-icons";
+import { FontAwesome6 } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+const navBar= () => {
+  const navigation = useNavigation();
 
-const NavBar = () => {
+  const [estado, setEstado] = useState(false);
+  onPressButton = () => {
+    setEstado(!estado);
+  };
+  const onPressButtoncalendar = ()=>{
+    navigation.navigate('calender')
+  }
   return (
     <View style={styles.navBar}>
       <View style={styles.exploreNavParent}>
-        <View style={[styles.exploreNav, styles.navLayout]}>
-          <Text style={[styles.explore, styles.mapTypo]}>Explore</Text>
-          <Image
-            style={[styles.world2Icon, styles.iconLayout]}
-            contentFit="cover"
-            source={require("../assets/world-2.png")}
-          />
-        </View>
-        <View style={styles.mapNav}>
-          <Image
-            style={[styles.pinIcon, styles.iconLayout]}
-            contentFit="cover"
-            source={require("../assets/pin.png")}
-          />
-          <Text style={[styles.map, styles.mapPosition]}>Map</Text>
-        </View>
-        <View style={[styles.wishlistNav, styles.navLayout]}>
-          <Image
-            style={[styles.favoriteIcon, styles.iconLayout]}
-            contentFit="cover"
-            source={require("../assets/favorite.png")}
-          />
-          <Text style={[styles.wishlist, styles.mapPosition]}>Wishlist</Text>
-        </View>
-        <View style={styles.ticket}>
-          <Image
-            style={[styles.ticketUseIcon, styles.iconLayout]}
-            contentFit="cover"
-            source={require("../assets/ticket-use.png")}
-          />
-          <Text style={[styles.ticket1, styles.mapPosition]}>Ticket</Text>
-        </View>
+        <TouchableHighlight onPress={onPressButton}>
+          <View style={[styles.exploreNav, styles.navLayout]}>
+            <Text style={[styles.explore, styles.mapTypo]}>Explore</Text>
+            <FontAwesome6
+              name="earth-africa"
+              size={24}
+              color={estado ? Color.colorGray : Color.colorMediumslateblue}
+              style={[styles.world2Icon, styles.iconLayout]}
+            />
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={onPressButton}>
+          <View style={styles.mapNav}>
+            <Feather
+              name="map-pin"
+              size={26}
+              color={ Color.colorGray}
+
+              // color={estado ? Color.colorGray : Color.colorMediumslateblue}
+            />
+            <Text style={[styles.map, styles.mapPosition]}>Map</Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={onPressButton}>
+          <View style={[styles.wishlistNav, styles.navLayout]}>
+            <AntDesign
+              name="hearto"
+              size={26}
+              color={ Color.colorGray}
+
+              // color={estado ? Color.colorGray : Color.colorMediumslateblue}
+              style={[styles.favoriteIcon, styles.iconLayout]}
+            />
+
+            <Text style={[styles.wishlist, styles.mapPosition]}>Wishlist</Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={onPressButtoncalendar}>
+          <View style={styles.ticket}>
+            <MaterialCommunityIcons
+              name="calendar-account-outline"
+              size={28}
+              color={ Color.colorGray}
+
+              // color={estado ? Color.colorGray : Color.colorMediumslateblue}
+              style={[styles.ticketUseIcon, styles.iconLayout]}
+            />
+
+            <Text style={[styles.ticket1, styles.mapPosition]}>Calendar</Text>
+          </View>
+        </TouchableHighlight>
+
+        <TouchableHighlight onPress={onPressButton}>
         <View style={styles.prfile}>
-          <Image
-            style={[styles.userCicrleLightIcon, styles.iconLayout]}
-            contentFit="cover"
-            source={require("../assets/user-cicrle-light.png")}
+          <FontAwesome6
+            name="user-circle"
+            size={26}
+            color={ Color.colorGray}
+            // color={estado ? Color.colorGray : Color.colorMediumslateblue}
+
+            style={[
+              styles.userCicrleLightIcon,
+              styles.iconLayout,
+            ]}
           />
           <Text style={[styles.prfile1, styles.mapPosition]}>Prfile</Text>
         </View>
+        </TouchableHighlight>
+
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  coloricon: { color: Color.colorGray },
+  onClickColor: { color: Color.colorMediumslateblue },
+
   navLayout: {
-    height: 41,
+    height: 45,
     position: "absolute",
   },
   mapTypo: {
     textAlign: "center",
-    fontFamily: FontFamily.aBeeZeeItalic,
     fontStyle: "italic",
   },
   iconLayout: {
@@ -69,15 +121,14 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   mapPosition: {
-    color: Color.colorGray_200,
+    color: Color.colorGray,
     fontSize: FontSize.size_xs,
     left: 0,
     position: "absolute",
   },
   explore: {
-    color: Color.colorMediumslateblue_100,
+    color: Color.colorMediumslateblue,
     fontSize: FontSize.size_xs,
-    fontFamily: FontFamily.aBeeZeeItalic,
     fontStyle: "italic",
     top: 27,
     left: 0,
@@ -88,7 +139,7 @@ const styles = StyleSheet.create({
   },
   exploreNav: {
     top: 6,
-    width: 42,
+    width: 45,
     left: 0,
   },
   pinIcon: {
@@ -96,10 +147,9 @@ const styles = StyleSheet.create({
   },
   map: {
     textAlign: "center",
-    fontFamily: FontFamily.aBeeZeeItalic,
     fontStyle: "italic",
     top: 27,
-    color: Color.colorGray_200,
+    color: Color.colorGray,
   },
   mapNav: {
     top: 5,
@@ -115,13 +165,12 @@ const styles = StyleSheet.create({
   wishlist: {
     top: 28,
     textAlign: "center",
-    fontFamily: FontFamily.aBeeZeeItalic,
     fontStyle: "italic",
   },
   wishlistNav: {
     top: 4,
     left: 148,
-    width: 44,
+    width: 46,
   },
   ticketUseIcon: {
     left: 3,
@@ -129,13 +178,12 @@ const styles = StyleSheet.create({
   ticket1: {
     top: 30,
     textAlign: "center",
-    fontFamily: FontFamily.aBeeZeeItalic,
     fontStyle: "italic",
   },
   ticket: {
     top: 3,
     left: 232,
-    width: 33,
+    width: 45,
     height: 44,
     position: "absolute",
   },
@@ -151,22 +199,25 @@ const styles = StyleSheet.create({
     left: 305,
     width: 30,
     top: 0,
-    height: 48,
     position: "absolute",
+    height: 48,
   },
   exploreNavParent: {
-    width: 351,
+    width: 340,
     height: 48,
   },
   navBar: {
-    top: 766,
     backgroundColor: Color.colorWhite,
-    overflow: "hidden",
+    alignItems: "center",
+    justifyContent: "center",
     paddingHorizontal: Padding.p_2xl,
     paddingVertical: Padding.p_lg,
-    left: 0,
-    position: "absolute",
+    zIndex: 4,
+    marginTop: 769,
   },
 });
 
-export default NavBar;
+
+
+
+export default navBar;

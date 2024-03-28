@@ -35,11 +35,11 @@ const SeeOackages = () => {
   });
   const [selectedItems, setSelectedItems] = useState([])
   const packageuserscategory = {
-    location: "Paris", 
-    maincategory: "solo",
+    location: "Sousse", 
+    maincategory: "group",
   }
   _storeData = async (data) => {
-    try {
+    try { 
       const jsonData = JSON.stringify(data);
       await AsyncStorage.setItem(
         'packageactivity',
@@ -85,9 +85,7 @@ const SeeOackages = () => {
         });
         console.log(response.data);
         setData(response.data);
-  
-        // Clear packageData object from memory
-       
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -296,7 +294,7 @@ const SeeOackages = () => {
                   <View style={[styles.groupItem, styles.groupItemLayout]} />
                 </View>
               </View>
-              <Text style={[styles.kms, styles.kmsPosition]}>{distance} km</Text>
+              <Text style={[styles.kms, styles.kmsPosition]}>{distance}    km</Text>
             </View>
           </View>
   
@@ -325,7 +323,7 @@ const SeeOackages = () => {
           </TouchableOpacity>
         </Pressable>
         <MinHeader />
-        <NavBar />
+       <NavBar />
       </View>
     );
   };
@@ -408,13 +406,14 @@ const SeeOackages = () => {
     },
     rectangleView: {
       borderRadius: Border.br_8xs,
-      backgroundColor: Color.colorWhitesmoke,
+      backgroundColor: "#BFC9CA",
       left: 0,
     },
     kmsPosition: {
       textAlign: "center",
       left: "50%",
       position: "absolute",
+      
     },
     iconSpaceBlock: {
       marginLeft: 15,
@@ -568,6 +567,7 @@ const SeeOackages = () => {
       height: 850,
       flex: 1,
     },
+     
   });
   
   export default SeeOackages;

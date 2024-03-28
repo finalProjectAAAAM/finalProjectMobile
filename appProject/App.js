@@ -31,7 +31,7 @@ const App = () => {
       <NavigationContainer>
         {hideSplashScreen ? (
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen
+             <Stack.Screen
               name="SeeOackages"
               component={SeeOackages}
               options={{ headerShown: false }}
@@ -45,7 +45,7 @@ const App = () => {
               name="Package"
               component={Package}
               options={{ headerShown: false }}
-            />
+            /> 
            
              {/* <Stack.Screen
               name="Tiket"

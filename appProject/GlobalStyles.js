@@ -60,7 +60,7 @@ export const Border = {
   colorDarkslategray: "#2c3550",
   br_3xs: 10,
   br_xs: 12,
-  br_8xs: 5,
+  br_8xs: 20,
   br_5xl: 24,
 };
 /* Paddings */

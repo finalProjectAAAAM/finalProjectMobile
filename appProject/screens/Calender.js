@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native'; // Import Sty
 import axios from 'axios';
 import { IP } from "../IP.json";
 import Packageofdays from '../components/Packageofdays'; // Import the Packageofdays component
-
+import NavBar from '../components/NavBar';
 const CalendarPage = () => {
   const [selected, setSelected] = useState('');
   const [selectedFormatted, setSelectedFormatted] = useState('');
@@ -82,6 +82,7 @@ const CalendarPage = () => {
           <Packageofdays data={data} date={selectedFormatted}/>
         </ScrollView>
       </View>
+      {/* <NavBar/> */}
     </View>
   );
 };

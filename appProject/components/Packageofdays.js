@@ -29,7 +29,8 @@ const Packageofdays = ({ data, selectedFormatted }) => {
    
   return (
     <View style={styles.groupParent}>
-      {data?.map((item, index) => (
+    {data && data.length > 0 ? (
+      data.map((item, index) => (
         <TouchableOpacity 
           key={item.idpackage} 
           onPress={() => handlePress(item.idpackage)}
@@ -52,8 +53,12 @@ const Packageofdays = ({ data, selectedFormatted }) => {
             </Text>
           </View>
         </TouchableOpacity>
-      ))}
-    </View>
+      ))
+    ) : (
+      <Text >No packages for today</Text>
+    )}
+  </View>
+  
   );
 };
 
