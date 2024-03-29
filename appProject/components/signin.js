@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, ImageBackground, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-import { IP1 } from "../ip.json";
+import { IP } from "../IP.json";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Signin = () => {
@@ -18,7 +18,7 @@ const Signin = () => {
       return;
     }
     try {
-      const response = await axios.post(`http://${IP1}:3001/usermobile/signinUser`, { email, pwd });
+      const response = await axios.post(`http://${IP}:3001/usermobile/signinUser`, { email, pwd });
       
       console.log(response.data.iduser);
       if (response.data !== undefined) {

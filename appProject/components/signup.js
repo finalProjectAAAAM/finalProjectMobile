@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, ImageBackground, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import axios from 'axios';
-import { IP1 } from '../ip.json';
+import { IP } from '../IP.json';
 import { useNavigation } from '@react-navigation/native';
 
 const SignUp = () => {
@@ -37,7 +37,7 @@ const SignUp = () => {
       password: password,
     };
 
-    axios.post(`http://${IP1}:3001/usermobile/signupUser`, userData)
+    axios.post(`http://${IP}:3001/usermobile/signupUser`, userData)
       .then((result) => {
         console.log('Signup done', result.data);
         navigation.navigate('Signin');

@@ -12,6 +12,7 @@ import { useFonts } from "expo-font";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import Signin from "./components/signin.js";
 import SignUp from "./components/signup.js";
+import Map from "./components/Map.js";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -33,22 +34,12 @@ const App = () => {
       <NavigationContainer>
         {hideSplashScreen ? (
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-             <Stack.Screen
-           name="Signin"
-           component={Signin}
-           options={{ headerShown: false }}
-           />
-           <Stack.Screen
-            name="SignUp"
-            component={SignUp}
-            options={{ headerShown: false }}
-            />
-            <Stack.Screen
+            {/* <Stack.Screen
               name="SeeOackages"
               component={SeeOackages}
               options={{ headerShown: false }}
-            />
-            <Stack.Screen
+            /> */}
+            {/* <Stack.Screen
             name="PaimentConfime"
             component={PaimentConfime}
             options={{ headerShown: false }}
@@ -57,7 +48,7 @@ const App = () => {
               name="Package"
               component={Package}
               options={{ headerShown: false }}
-            />
+            /> */}
           
              {/* <Stack.Screen
               name="Tiket"
@@ -69,7 +60,13 @@ const App = () => {
               component={Update}
               options={{ headerShown: false }}
             /> */}
-            <Stack.Screen name="calender" component={Calender} />
+            <Stack.Screen
+              name="Map"
+              component={Map}
+              options={{ headerShown: false }}
+            />
+            
+            {/* <Stack.Screen name="calender" component={Calender} /> */}
             
           </Stack.Navigator>
         ) : null}

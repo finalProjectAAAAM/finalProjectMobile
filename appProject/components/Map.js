@@ -2,136 +2,13 @@ import React, { useEffect, useState,useRef} from "react";
 import {StyleSheet,View,TouchableOpacity} from "react-native";
 import * as Location from "expo-location";
 import MapView, { Marker,PROVIDER_GOOGLE } from "react-native-maps";
-
+import { IP } from "../IP.json";
 
 
 const mapJson = 
 [
   {
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#ebe3cd"
-      }
-    ]
-  },
-  {
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#523735"
-      }
-    ]
-  },
-  {
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#f5f1e6"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#c9b2a6"
-      }
-    ]
-  },
-  {
     "featureType": "administrative.land_parcel",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#dcd2be"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.land_parcel",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#ae9e90"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape.natural",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#dfd2ae"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#dfd2ae"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#93817c"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#a5b076"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#447530"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#f5f1e6"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "color": "#3cdda7"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#fdfcf8"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
     "elementType": "labels",
     "stylers": [
       {
@@ -140,28 +17,56 @@ const mapJson =
     ]
   },
   {
-    "featureType": "road.highway",
+    "featureType": "poi",
+    "elementType": "labels.text",
     "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.business",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "stylers": [
+      {
+        "color": "#c0bdd1"
+      },
       {
         "visibility": "simplified"
       }
     ]
   },
   {
-    "featureType": "road.highway",
-    "elementType": "geometry",
+    "featureType": "road",
+    "elementType": "labels.icon",
     "stylers": [
       {
-        "color": "#f8c967"
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
       }
     ]
   },
   {
     "featureType": "road.highway",
-    "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#e9bc62"
+        "color": "#eeb73f"
       }
     ]
   },
@@ -170,28 +75,7 @@ const mapJson =
     "elementType": "labels",
     "stylers": [
       {
-        "color": "#dd643c"
-      },
-      {
         "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway.controlled_access",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#e98d58"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway.controlled_access",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#db8555"
       }
     ]
   },
@@ -205,82 +89,26 @@ const mapJson =
   },
   {
     "featureType": "road.local",
-    "elementType": "labels.text.fill",
+    "elementType": "labels",
     "stylers": [
       {
-        "color": "#806b63"
+        "visibility": "off"
       }
     ]
   },
   {
     "featureType": "transit",
-    "elementType": "labels",
     "stylers": [
       {
-        "color": "#3c47dd"
-      }
-    ]
-  },
-  {
-    "featureType": "transit.line",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#dfd2ae"
-      }
-    ]
-  },
-  {
-    "featureType": "transit.line",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#8f7d77"
-      }
-    ]
-  },
-  {
-    "featureType": "transit.line",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#ebe3cd"
-      }
-    ]
-  },
-  {
-    "featureType": "transit.station",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#dfd2ae"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#b9d3c2"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#92998d"
+        "visibility": "off"
       }
     ]
   }
 ]
-export default function App() {
+export default function Map() {
   const [currentLocation, setCurrentLocation] = useState(null);
   const [initialRegion, setInitialRegion] = useState(null);
-  const [mode, setMode] = useState("standard")
-  const [location, setLocation] = useState(null);
+  const [offers, setOffers] = useState([]);
   const mapRef = useRef()
   const onRegionChange = (region) =>{
     console.log(region);
@@ -303,20 +131,27 @@ export default function App() {
         longitudeDelta: 0.005,
       });
     };
-
+       
     getLocation();
 }, []);
 
 
+useEffect(() => {
+  fetchOffers();
+}, []);
 
-const handleMapMode = () => {
-  const change = ["standard", "satellite", "terrain", "hybrid"]
-    setCurrent(current + 1)
-    setMode(change[current])
-    if(current === 3){
-      setCurrent(0)
-    }
-}
+const fetchOffers = async () => {
+  try {
+    const response = await fetch(`http://${IP}:3001/userProvider/getalloffer`);
+    const data = await response.json();
+    setOffers(data);
+  } catch (error) {
+    console.error('Error fetching offers:', error);
+  }
+};
+
+
+
 
 
 
@@ -342,10 +177,21 @@ const handleMapMode = () => {
               title="your location"
             />
           )}
+          {offers.map((offer, index) => (
+          <Marker
+            key={index}
+            coordinate={{
+              latitude: offer.lat,
+              longitude: offer.long,
+            }}
+            title={offer.title}
+            description={offer.description}
+            places={offer.places}
+          />
+        ))}
         </MapView>
-      )}
-       <TouchableOpacity style={styles.touch} onPress={()=>handleMapMode()} >
-      </TouchableOpacity>
+     )}
+     
     </View>
   );
 };
@@ -360,8 +206,5 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%"
   },
-  touch : {
-    width:"30%",
-    height:"40%"
-  }
+  
 });
